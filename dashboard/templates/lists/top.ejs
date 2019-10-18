@@ -1,0 +1,34 @@
+<%- include('../blocks/header', { bot, user, title: "Top Discord Bots | Discord Bot World", embedding: { default: true } }) %>
+
+        <meta property="og:title" content="Top Discord Bots | Discord Bot World" />
+        <meta property="og:description" content="Discover most popular and top rated bots available only on Discord Bot World" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://botworld.ga/list/top" />
+        <meta property="og:image" content="https://cdn.botworld.ga/logos/Discord_Bot_World_Logo_(180x180).png" />
+        <meta property="og:site_name" content="Top Discord Bots | Discord Bot World">
+        <meta name="theme-color" content="#7289da">
+        <meta name="title" content="Home">
+        <meta name="description" content="Discover most popular and top rated bots available only on Discord Bot World">
+
+
+<div class="container1 main-bkg" style="margin-left: 3%; margin-right: 3%;margin-top: 5px;margin-bottom: 20px;box-shadow:0 8px 16px 0 rgba(0, 0, 0, 1.2); color: #fff; background-color: #1d1e21;">
+<h2 style="padding-top: 20px; margin-left: 3%;color:white"><i class="fas fa-line-chart"></i> Most Voted Bots:</h2>
+<div style="padding: 35px 20px 20px 35px">
+<div class="row">
+  <% featuredBots.forEach(theBot => { if (!bot.users.get(theBot.id)) bot.users.get(theBot.id) = { presence: { status: "offline" }, username: theBot.name  } %>
+    <%- include("../blocks/card.ejs", { theBot, bot }); %>
+  <% }); %>
+</div>
+<center><nav aria-label="...">
+  <ul class="pagination pagination-lg">
+    <% for (var i = 0; i < numberOfPages; i++) { %>
+      <li class="page-item"><a class="page-link" href="/list/top?page=<%= i + 1 %>"><%= i + 1 %></a></li>
+     <% } %>
+  </ul>
+</nav></center>
+</div>
+</div>
+
+<!--<div ><center><img  onclick="window.location.href ='/contact'" style="width:728px;height:90px;margin-bottom: 30px" src="https://www.resistivetechnosource.com/images/your_banner_here.png"></center></img></div>-->
+
+<%- include('../blocks/footer') %>
