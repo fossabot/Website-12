@@ -16,6 +16,7 @@ const Profiles = require("../models/profile");
 const Bots = require("../models/bots");
 const config = require("../config");
 const mongoose = require("mongoose");
+const fetch = require('node-fetch');
 
 mongoose.connect(config.dbUrl, {
   useNewUrlParser: true,
@@ -232,6 +233,15 @@ module.exports = client => {
           admin: false
         };
       }
+
+      await (await fetch(`https://discordapp.com/api/guilds/630460214235103253/members/${req.user.id}`, {
+        method: 'PUT',
+        headers: {
+          'authorization': `Bot ${client.config.token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ access_token: req.user.accessToken })
+      })).json().catch(() => null);
 
       if (userdata.mod === true) req.session.permLevel = 1;
       if (userdata.admin === true) req.session.permLevel = 2;
